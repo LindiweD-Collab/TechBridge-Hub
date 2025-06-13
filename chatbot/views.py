@@ -9,7 +9,7 @@ def ask_ai(request):
     if request.method == 'POST':
         try:
 
-            openai.api_key = "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"
+            openai.api_key = "OPEN_API_KEY"
 
             data = json.loads(request.body)
             user_message = data.get('message')
