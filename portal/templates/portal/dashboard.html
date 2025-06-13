@@ -1,0 +1,34 @@
+{% extends 'portal/base.html' %}
+
+{% block title %}Dashboard | {{ block.super }}{% endblock %}
+
+{% block content %}
+    
+
+    
+    {% if user.client %}
+        <h2>{{ user.client.name }} Dashboard</h2>
+        <p>Welcome, {{ user.first_name|default:user.username }}! Here are your current projects.</p>
+    {% else %}
+        <h2>Dashboard</h2>
+        <p>Welcome, {{ user.first_name|default:user.username }}! You are not currently linked to a client company.</p>
+    {% endif %}
+
+    <div class="dashboard-section">
+        <h3>Your Projects</h3>
+        
+        {% for project in projects %}
+            <div class="project-card">
+                <h4><a href="{% url 'project_detail' project.pk %}">{{ project.title }}</a></h4>
+                <p><strong>Status:</strong> <span class="status-{{ project.status|lower }}">{{ project.get_status_display }}</span></p>
+                {% if project.end_date %}
+                    <p><strong>Target End Date:</strong> {{ project.end_date }}</p>
+                {% endif %}
+            </div>
+        {% empty %}
+            <div class="project-card">
+                <p>Your company has no active projects with us at the moment.</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

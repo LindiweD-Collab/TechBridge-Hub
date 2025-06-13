@@ -1,0 +1,19 @@
+{% extends 'portal/base.html' %}
+
+{% block title %}Explore Our Services | {{ block.super }}{% endblock %}
+
+{% block content %}
+<h1> What We Can Do for You</h1>
+<p>We're passionate about empowering organizations like yours to thrive in a fast-moving digital world. Take a look at the awesome services we offer below!</p>
+
+<div class="services-grid">
+    {% for service in services %}
+        <div class="service-card">
+            <h3> {{ service.name }}</h3>
+            <p>{{ service.desc }}</p>
+        </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

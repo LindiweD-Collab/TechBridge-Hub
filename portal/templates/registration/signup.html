@@ -1,0 +1,80 @@
+{% extends 'portal/base.html' %}
+
+{% block title %}Sign Up | {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>Create Your Account</h2>
+    <p>Join the TechBridge Client Portal.</p>
+    
+    <form method="post" class="auth-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.first_name.id_for_label }}">First Name</label>
+            {{ form.first_name }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.last_name.id_for_label }}">Last Name</label>
+            {{ form.last_name }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.email.id_for_label }}">Email</label>
+            {{ form.email }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.username.id_for_label }}">Username</label>
+            {{ form.username }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.company_name.id_for_label }}">Company Name</label>
+            {{ form.company_name }}
+        </div>
+
+        <div class="password-wrapper">
+            <label for="{{ form.password1.id_for_label }}">Password</label>
+            {{ form.password1 }}
+            <button type="button" class="toggle-password">
+                <i class="fas fa-eye"></i>
+            </button>
+        </div>
+        <div class="password-wrapper">
+            <label for="{{ form.password2.id_for_label }}">Password confirmation</label>
+            {{ form.password2 }}
+            <button type="button" class="toggle-password">
+                <i class="fas fa-eye"></i>
+            </button>
+        </div>
+
+        {% if form.errors %}
+            <div class="form-errors">
+                {{ form.errors }}
+            </div>
+        {% endif %}
+
+        <button type="submit" class="auth-button">Sign Up</button>
+    </form>
+</div>
+
+
+<script>
+    const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+
+    togglePasswordButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const passwordInput = this.previousElementSibling;
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            const icon = this.querySelector('i');
+            if (type === 'password') {
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            } else {
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'portal/base.html' %}
+
+{% block title %}Home | {{ block.super }}{% endblock %}
+
+{% block content %}
+
+   
+
+<div class="hero-container">
+    <h1>Welcome to <span style="color: #574914;">TechBridge Solutions</span></h1>
+    <p> The kettle's on, and we're ready to build. Whether you're launching a startup or modernizing your systems, we craft smart solutions, support your tech, and bridge the gap between vision and execution.</p>
+    <a href="{% url 'services' %}" class="cta-button"> Explore Our Services</a>
+</div>
+{% endblock %}

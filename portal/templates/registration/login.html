@@ -1,0 +1,52 @@
+{% extends 'portal/base.html' %}
+
+{% block title %}Client Login | {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <h2>Client Portal Login</h2>
+    <p>Please enter your credentials to access your project dashboard.</p>
+    <form method="post">
+        {% csrf_token %}
+    
+        <p>
+            <label for="{{ form.username.id_for_label }}">Username:</label>
+            {{ form.username }}
+        </p>
+    
+        <div class="password-wrapper">
+            <label for="{{ form.password.id_for_label }}">Password:</label>
+            {{ form.password }}
+            <button type="button" class="toggle-password">
+                <i class="fas fa-eye"></i>
+            </button>
+        </div>
+    
+        <button type="submit" class="auth-button">Login</button>
+    </form>
+</div>
+<div class="signup-link">
+    <p>Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+</div>
+</div> 
+
+
+<script>
+    const togglePasswordButton = document.querySelector('.toggle-password');
+    const passwordInput = document.querySelector('input[name="password"]');
+
+    togglePasswordButton.addEventListener('click', function () {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+
+        const icon = this.querySelector('i');
+        if (type === 'password') {
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        } else {
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        }
+    });
+</script>
+{% endblock %}
